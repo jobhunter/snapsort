@@ -1,0 +1,44 @@
+
+This is my solution to the coding challenge posted on the SnapSort blog.
+It attempts to match product listings to pre-established products.
+It does so using only the "title" field of the JSON objects in the listings.txt file,
+in an attempt to be more realistic, assuming these lines of text come from webpages.
+Judging from the listings.txt file given in the challenge, it looks like, in order to
+do the challenge properly, you need to do natural language processing.  Since this is
+too much for me to do for just a job application, this program merely looks for a
+product string at the beginning of every listing title.  This grammatically
+eliminates false positives for accessories to products...
+It does a case-insensitive string search of expected strings and equivocates dashes
+with spaces or no space, so "cyber-shot", "cyber shot" and "cybershot" are considered
+the same thing...
+
+
+It's a command-line program that uses the following pattern:
+
+build_relation.py products.txt listings.txt 
+
+It prints the desired output to stdout so you'll probably want to redirect that into a file like so:
+
+build_relation.py products.txt listings.txt > output.txt
+
+As a side effect, it may create the following file in the working directory:
+
+ambiguities.txt
+
+Please don't have a file with this name in the directory.  It describes any potential ambiguities
+in how it attempts to resolve string parsings to products in the database.  For example, with the
+products.txt file provided in the challenge, an ambiguity exists between the following products:
+
+{"product_name":"Canon-ELPH-300HS","manufacturer":"Canon","model":"300 HS","family":"ELPH","announced-date":"2011-02-06T19:00:00.000-05:00"}
+{"product_name":"Canon_IXUS_300_HS","manufacturer":"Canon","model":"300 HS","family":"IXUS","announced-date":"2010-05-10T20:00:00.000-04:00"}
+
+The algorithm accepts, among other strings, a manufacturer name and model name pair as a match, so
+both of the products above will be matched to the string:
+
+Canon 300 HS
+
+Because the program was designed to be conservative, it will regard ambiguous cases as not a match...
+
+Finally, the program is inclusive, so kits including the product in question do count as matches...
+
+
