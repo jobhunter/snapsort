@@ -1,6 +1,11 @@
 
 This is my solution to the coding challenge posted on the SnapSort blog.
-It attempts to match product listings to pre-established products.
+It is written in Python.  You might need to replace the first line of the program
+with the path to your actual Python installation.  I believe most Linux distributions
+come with Python built-in so it should be somewhere on your system.  It requires at
+least version 2.6 for the JSON module as well as generators...
+
+This program attempts to match product listings to pre-established products.
 It does so using only the "title" field of the JSON objects in the listings.txt file,
 in an attempt to be more realistic, assuming these lines of text come from webpages.
 Judging from the listings.txt file given in the challenge, it looks like, in order to
@@ -11,9 +16,6 @@ eliminates false positives for accessories to products...
 It does a case-insensitive string search of expected strings and equivocates dashes
 with spaces or no space, so "cyber-shot", "cyber shot" and "cybershot" are considered
 the same thing...
-You might need to replace the first line of the program with the path to your actual
-Python installation.  I believe most Linux distributions come with Python built-in so
-it should be somewhere on the system...
 
 
 It's a command-line program that uses the following pattern:

@@ -1,4 +1,4 @@
-#!/user/bin/python
+#!/usr/bin/python
 
 import sys
 import json
